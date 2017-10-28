@@ -1,0 +1,10 @@
+Package: diffR
+Title: Estimate Diffusion Model via Fast-Dm via R
+Version: 0.0.0.9000
+Authors@R: person("Chris", "Mellinger", email = "clmellinger@gmail.com", role = c("aut", "cre"))
+Description: Provides (a) function(s) to estimate and process data for a diffusion model analysis. Useful for parallelizing.
+Depends: R (>= 3.3.3)
+License: Free
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1.9000
