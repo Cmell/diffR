@@ -5,7 +5,8 @@
 \title{Estimates a single diffusion model via fast-dm.}
 \usage{
 diffEst(pid, dataDir, logDir, baseCtl, returnResult = F, writeResult = T,
-  df = NULL, varNames = NULL, fastDmLoc = "./fast-dm")
+  df = NULL, varNames = NULL, fastDmLoc = "./fast-dm", stdOutLoc = NULL,
+  saveMode = "a+", ...)
 }
 \arguments{
 \item{pid}{The file prefix on the ".dat" file to process.}
@@ -21,14 +22,23 @@ a load or log statement.}
 returned containing the results of the estimation.}
 
 \item{writeResult}{If TRUE (default) the result is written to a .lst file
-in the `logDir`.}
+in the \code{logDir}.}
 
 \item{df}{Dataframe to process data from. Currently not tested.}
 
-\item{varNames}{Character vector of variable names to use from `df`.}
+\item{varNames}{Character vector of variable names to use from \code{df}.}
 
 \item{fastDmLoc}{Path to the fast-dm executable, including the names of the
 executable.}
+
+\item{stdOutLoc}{A filename to save output to. Default is to not save
+output.}
+
+\item{saveMode}{}
+
+\item{...}{Other parameters to pass to \code{system()}. Note that
+\code{intern} is already set according to whether \code{stdOutLoc} is 
+provided.}
 }
 \value{
 If

@@ -8,7 +8,10 @@ diffEst <- function (
   writeResult = T,
   df=NULL,
   varNames=NULL,
-  fastDmLoc='./fast-dm'
+  fastDmLoc='./fast-dm',
+  stdOutLoc=NULL,
+  saveMode='a+',
+  ...
 ) {
   #' Estimates a single diffusion model via fast-dm.
   #'
@@ -20,11 +23,17 @@ diffEst <- function (
   #' @param returnResult If TRUE (not default), a dataframe with 1 row is 
   #' returned containing the results of the estimation.
   #' @param writeResult If TRUE (default) the result is written to a .lst file
-  #' in the `logDir`.
+  #' in the \code{logDir}.
   #' @param df Dataframe to process data from. Currently not tested.
-  #' @param varNames Character vector of variable names to use from `df`.
+  #' @param varNames Character vector of variable names to use from \code{df}.
   #' @param fastDmLoc Path to the fast-dm executable, including the names of the
   #' executable.
+  #' @param stdOutLoc A filename to save output to. Default is to not save
+  #' output.
+  #' @param saveMode 
+  #' @param ... Other parameters to pass to \code{system()}. Note that
+  #' \code{intern} is already set according to whether \code{stdOutLoc} is 
+  #' provided.
   #'
   #' @return If 
   #' @export
@@ -57,7 +66,24 @@ diffEst <- function (
   
   # Construct the command
   sysCmd <- paste(fastDmLoc, ctlFl)
-  system(sysCmd)
+  sysResult <- system(sysCmd,
+                      intern=(!is.null(stdOutLoc)),
+                      ...)
+  
+  # Save output if file is specified
+  if (!is.null(stdOutLoc)) {
+    # First, get lock.
+    # create lock file if not there.
+    lckFile <- paste0(stdOutLoc, '.lock')
+    if (!file.exists(lckFile)) {
+      file.create(lckFile)
+    }
+    lck <- filelock::lock(lckFile)
+    flConn <- file(stdOutLoc, open=saveMode)
+    write(sysResult, file=flConn)
+    close(flConn)
+    filelock::unlock(lck)
+  }
   
   # Clean up
   file.remove(ctlFl)
