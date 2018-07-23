@@ -87,7 +87,7 @@ diffPlot <- function(v, z, t0, a, zr,
   #' @param tLimit 
   #'
   #' @return
-  #' @export
+  #' @export diffPlot
   #'
   #' @examples
   
