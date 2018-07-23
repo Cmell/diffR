@@ -129,7 +129,7 @@ diffPlot <- function(v, z, t0, a, zr,
     plotDensities <- TRUE
   } else {
     if(is.null(tmax)){
-      tmax <- vEntT * tExtFactor
+      tmax <- vEndT * tExtFactor
     }
   }
   
