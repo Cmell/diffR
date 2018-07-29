@@ -1,3 +1,5 @@
+library(grid)
+library(gridBase)
 
 diffPlotHelper <- function(pnum, responseVar, rtVar, rawData, diffResults,
                            condition=c("con_b", "con_s", "con_d", "con_w",
@@ -41,7 +43,8 @@ diffPlot <- function(v, z, t0, a, zr,
                      t0Lty=1, t0Lwd=1, t0Col="magenta", t0Length=0.10,
                      t0Angle=90, t0Code=3,
                      xlab="time (seconds)", ylab="evidence",
-                     main="", tLimit=2.5){
+                     main="", tLimit=2.5,
+                     plotDensities = F, plotRtPts = F){
   #' Plotting the Diffusion Model
   #' 
   #' This function constructs a diffusion model plot. It shows average parameter
@@ -86,10 +89,8 @@ diffPlot <- function(v, z, t0, a, zr,
   #' @param main 
   #' @param tLimit 
   #'
-  #' @return
   #' @export diffPlot
   #'
-  #' @examples
   
   if(!require(beeswarm)){
     install.packages("beeswarm")
@@ -103,11 +104,12 @@ diffPlot <- function(v, z, t0, a, zr,
       assign(c[[1]][1], as.numeric(vec[i]))
     }
   }
-  print(t0)
+  #print(t0)
   if(missing(z)) {z=zr*a}
-  print("43")
+  #print("43")
   if(missing(zr)) {zr=z/a}
-  print("45")
+  #print("45")
+  
   # set up plot dimensions
   if(v>0) vEndT <- ((a-z)/v) + t0
   if(v<0) vEndT <- ((0-z)/v) + t0
@@ -137,7 +139,7 @@ diffPlot <- function(v, z, t0, a, zr,
   layMat <- matrix(c(2, 1, 3), nrow=3, ncol=1)
   hts <- c(.2, .6, .2)
   layout(layMat, heights=hts)
-  op <- par(mar=c(2, 4, 0, 1))
+  #op <- par(mar=c(2, 4, 0, 1))
   
   # Basic plot
   plot(x=NA, y=NA, xlim=c(tmin, tmax), ylim=c(ymin, ymax),
@@ -170,29 +172,29 @@ diffPlot <- function(v, z, t0, a, zr,
       plot(x=NA, y=NA, xlim=c(tmin,tmax), ylim=c(0, max(topDens$y)),
            axes=F, xlab="", ylab="")
       lines(topDens)
-      beeswarm(x=topRTs, at=.1, vertical=F, side=1, add=T)
     } else{
       plot(x=NA, y=NA, xlim=c(tmin,tmax), ylim=c(0, 2),
            axes=F, xlab="", ylab="")
+    }
+    if (plotRtPts) {
       beeswarm(x=topRTs, at=.1, vertical=F, side=1, add=T)
+      beeswarm(x=bottomRTs, at=-.1, vertical=F, side=-1, add=T,
+               method="square")
     }
     
     if(length(bottomRTs)>1){
       bottomDens <- density(bottomRTs)
       plot(x=NA, y=NA, xlim=c(tmin,tmax), ylim=c(min(-bottomDens$y), 0),
            axes=F, xlab="", ylab="")
-      beeswarm(x=bottomRTs, at=-.1, vertical=F, side=-1, add=T,
-               method="square")
       lines(x=bottomDens$x, y=-bottomDens$y)
     } else{
       plot(x=NA, y=NA, xlim=c(tmin,tmax), ylim=c(-4, 0),
            axes=F, xlab="", ylab="")
-      beeswarm(x=bottomRTs, at=-.1, vertical=F, side=-1, add=T,
-               method="square")
+      
     }
   }
   
-  par(op)
+  #par(op)
 }
 
 #diffPlot(v=.3, z=.5, a=1, t0=.1)
