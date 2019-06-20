@@ -2,3 +2,4 @@
 
 export(diffEst)
 export(diffPlot)
+export(plotCDF)
