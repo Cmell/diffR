@@ -11,4 +11,3 @@ RoxygenNote: 6.1.1
 Imports:
   filelock,
   gridBase
-Remotes: R-libs/filelock
