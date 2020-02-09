@@ -10,8 +10,8 @@ diffPlot(v, z, t0, a, zr, sv, szr, st0, ymin = NULL, ymax = NULL,
   aLwd = 1, aCol = "gray", vLty = 1, vLwd = 2, vCol = "blue",
   vLength = 0.2, vAngle = 20, vCode = 2, t0Lty = 1, t0Lwd = 1,
   t0Col = "magenta", t0Length = 0.1, t0Angle = 90, t0Code = 3,
-  xlab = "time (seconds)", ylab = "evidence", main = "", tLimit = 2.5,
-  plotDensities = F, plotRtPts = F)
+  xlab = "time (seconds)", ylab = "evidence", main = "",
+  tLimit = 2.5, plotDensities = F, plotRtPts = F)
 }
 \arguments{
 \item{v}{The drift rate.}

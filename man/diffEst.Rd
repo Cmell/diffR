@@ -4,9 +4,9 @@
 \alias{diffEst}
 \title{Estimates a single diffusion model via fast-dm.}
 \usage{
-diffEst(pid, dataDir, logDir, baseCtl, returnResult = F, writeResult = T,
-  df = NULL, varNames = NULL, fastDmLoc = "./fast-dm", stdOutLoc = NULL,
-  saveMode = "a+", ...)
+diffEst(pid, dataDir, logDir, baseCtl, returnResult = F,
+  writeResult = T, df = NULL, varNames = NULL,
+  fastDmLoc = "./fast-dm", stdOutLoc = NULL, saveMode = "a+", ...)
 }
 \arguments{
 \item{pid}{The file prefix on the ".dat" file to process.}

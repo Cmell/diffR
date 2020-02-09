@@ -67,7 +67,6 @@ plotCDF <- function (..., realData = NULL,
   #' @param linesPars A named list of arguments to pass to the \code{lines()}
   #' call that plots the \code{realData} cdf (if provided).
   #'
-  #' @return
   #' @export plotCDF
   
   vals <- plotCDFValues(...)

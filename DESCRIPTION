@@ -7,6 +7,8 @@ Depends: R (>= 3.3.3)
 License: Free
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1.9000
-Imports: filelock
+RoxygenNote: 6.1.1
+Imports:
+  filelock,
+  gridBase
 Remotes: R-libs/filelock
